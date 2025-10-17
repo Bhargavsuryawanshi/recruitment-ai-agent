@@ -3,7 +3,7 @@ uvicorn[standard]
 jinja2
 python-multipart
 pydantic
-google-generativeai
+google-genai
 python-dotenv
 pypdf
 python-docx
