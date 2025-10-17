@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recruitment AI Agent</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Recruitment AI Agent</h1>
+        
+        <!-- Job Description Section -->
+        <div class="section">
+            <h2>1. Provide Job Description</h2>
+            <form action="/process-jd" method="post" enctype="multipart/form-data">
+                <!-- Manual Input -->
+                <textarea name="jd_text" rows="10" placeholder="Paste the job description here...">{{ job_description or '' }}</textarea>
+                
+                <!-- File Upload -->
+                <p><strong>Or</strong> upload a JD file (PDF, DOCX):</p>
+                <input type="file" name="jd_file">
+                
+                <!-- AI Generation -->
+                <p><strong>Or</strong> generate a JD with AI:</p>
+                <div class="form-grid">
+                    <input type="text" name="job_title" placeholder="Job Title">
+                    <input type="text" name="experience" placeholder="Years of Experience">
+                    <input type="text" name="skills" placeholder="Must-have Skills (comma-separated)">
+                    <input type="text" name="company_name" placeholder="Company Name">
+                    <input type="text" name="employment_type" placeholder="Employment Type">
+                    <input type="text" name="industry" placeholder="Industry">
+                    <input type="text" name="location" placeholder="Location">
+                </div>
+                
+                <button type="submit">Process Job Description</button>
+            </form>
+        </div>
+
+        <!-- Resume Upload Section -->
+        {% if job_description %}
+        <div class="section">
+            <h2>2. Upload Resumes</h2>
+            <form action="/evaluate-resumes" method="post" enctype="multipart/form-data">
+                <p>Upload up to 10 resumes (PDF, DOCX):</p>
+                <input type="file" name="resumes" multiple required>
+                <button type="submit">Evaluate Resumes</button>
+            </form>
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

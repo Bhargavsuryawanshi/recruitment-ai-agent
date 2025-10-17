@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Evaluation Results</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Candidate Evaluation Results</h1>
+        <a href="/">Start Over</a>
+        
+        {% for candidate in candidates %}
+        <div class="candidate-card {% if loop.first %}best-match{% endif %}">
+            <h3>{{ candidate.filename }}</h3>
+            <p><strong>Score:</strong> {{ candidate.score }}/100</p>
+            <p><strong>Missing Skills:</strong> {{ candidate.missing_skills|join(', ') }}</p>
+            <p><strong>Remarks:</strong> {{ candidate.remarks }}</p>
+            
+            <div class="email-section">
+                <h4>Generated Email:</h4>
+                <pre>{{ candidate.email }}</pre>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
